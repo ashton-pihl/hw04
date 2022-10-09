@@ -12,6 +12,42 @@ After completing Homework 3, students will be able to:
 * use `JuMP.jl` to solve a linear program;
 * compare solutions associated with different objective values.
 
+## Other Information
+
+### Problem Data
+
+All of the generation and demand data in the instructions is provided in the solution template starter code to remove the chance that errors might result from mis-transcription (unless I mis-transcribed data, in which case, you shouldn't be penalized!). You can use those vectors as you would like within your solution code.
+
+### Plotting Instructions
+
+The [default environment](#default-environment) contains two pre-installed [backends for `Plots.jl`](https://docs.juliaplots.org/latest/backends/): `GR` and `Plotly`. `GR` is the default backend for `Plots.jl`. If you want to try out a different backend (`Plotly` will give you slightly different plots, and also includes commands for some interactivity, like zomming in) or if you're running into errors with the default `Plots` configuration, try using `Plotly` with:
+
+```julia
+plotly() # set the Plotly backend
+
+plot(...)
+```
+
+Since you have multiple series to plot, you will want to make sure that your color choices clearly distinguish each series. `Plots.jl` lets you use any of the color palettes from [`ColorSchemes.jl`](https://juliagraphics.github.io/ColorSchemes.jl/stable/catalogue/) with
+
+```julia
+plot(..., color_palette=...)
+```
+
+ I'd recommend the following options, but you can feel free to choose any so long as the series are easily distinguishable (or else you could be penalized if the TA cannot easily tell your lines apart):
+- `:tol_bright`
+- `:seaborn_bright`
+- `:seaborn_colorblind`
+### Default Environment
+
+The default environment contains the following packages:
+- `JuMP.jl`
+- `HiGHS.jl`
+- `Plots.jl`
+- `GR.jl`
+- `Plotly.jl`
+- `DataFrames.jl`
+- `Weave.jl`
 ## What To Submit
 
 Submit a single `.pdf` file to Gradescope. Make sure to tag each problem. You should include code with your submission in code blocks as needed for your solution. Similarly, figures should be captioned appropriately.  **Make sure that your final report includes a References section!**
