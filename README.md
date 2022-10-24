@@ -13,11 +13,6 @@ After completing Homework 4, students will be able to:
 * compare solutions with and without different regulatory interventions.
 
 ## Other Information
-
-### Problem Data
-
-All of the generation and demand data in the instructions is provided in the solution template starter code to remove the chance that errors might result from mis-transcription (unless I mis-transcribed data, in which case, you shouldn't be penalized!). You can use those vectors as you would like within your solution code.
-
 ### Plotting Instructions
 
 The [default environment](#default-environment) contains two pre-installed [backends for `Plots.jl`](https://docs.juliaplots.org/latest/backends/): `GR` and `Plotly`. `GR` is the default backend for `Plots.jl`. If you want to try out a different backend (`Plotly` will give you slightly different plots, and also includes commands for some interactivity, like zomming in) or if you're running into errors with the default `Plots` configuration, try using `Plotly` with:
