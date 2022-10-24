@@ -1,16 +1,16 @@
-# BEE 4750 Homework 3
+# BEE 4750 Homework 4
 
-Instructions: [![Web Instructions](https://img.shields.io/static/v1?label=HW3&message=HTML&color=b31b1b&labelColor=222222&style=flat)](https://viveks.me/environmental-systems-analysis/assignments/hw3/hw3/) [![PDF Instructions](https://img.shields.io/static/v1?label=HW3&message=PDF&color=b31b1b&labelColor=222222&style=flat)](https://viveks.me/environmental-systems-analysis/assignments/hw3/hw3.pdf)
+Instructions: [![Web Instructions](https://img.shields.io/static/v1?label=HW4&message=HTML&color=b31b1b&labelColor=222222&style=flat)](https://viveks.me/environmental-systems-analysis/assignments/hw4/hw4/) [![PDF Instructions](https://img.shields.io/static/v1?label=HW4&message=PDF&color=b31b1b&labelColor=222222&style=flat)](https://viveks.me/environmental-systems-analysis/assignments/hw4/hw4.pdf)
 
-This homework assignment is focused on simulating a dissolved oxygen model, evaluating treatment options, and identifying risk of noncompliance with a regulation.
+This homework assignment is focused on developing a mixed-integer linear program for solid waste management and identifying changes with a carbon tax.
 
 ## Learning Objectives
 
-After completing Homework 3, students will be able to:
+After completing Homework 4, students will be able to:
 
-* formulate a linear programming model for generating capacity expansion;
-* use `JuMP.jl` to solve a linear program;
-* compare solutions associated with different objective values.
+* formulate a mixed-integer linear programming model for solid waste management;
+* use `JuMP.jl` to solve a mixed-integer linear program;
+* compare solutions with and without different regulatory interventions.
 
 ## Other Information
 
@@ -27,21 +27,11 @@ plotly() # set the Plotly backend
 
 plot(...)
 ```
-
-Since you have multiple series to plot, you will want to make sure that your color choices clearly distinguish each series. `Plots.jl` lets you use any of the color palettes from [`ColorSchemes.jl`](https://juliagraphics.github.io/ColorSchemes.jl/stable/catalogue/) with
-
-```julia
-plot(..., color_palette=...)
-```
-
- I'd recommend the following options, but you can feel free to choose any so long as the series are easily distinguishable (or else you could be penalized if the TA cannot easily tell your lines apart):
-- `:tol_bright`
-- `:seaborn_bright`
-- `:seaborn_colorblind`
 ### Default Environment
 
 The default environment contains the following packages:
 - `JuMP.jl`
+- `Cbc.jl`
 - `HiGHS.jl`
 - `Plots.jl`
 - `GR.jl`
