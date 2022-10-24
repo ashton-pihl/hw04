@@ -3,7 +3,7 @@ title: "BEE 4750/5750 Homework 4"
 author: "Your name here (your netID here)"
 date: `j import Dates; Dates.Date(Dates.now())`
 weave_options:
-    term: true
+    term: false
     results: tex
     cache: off
 ---
