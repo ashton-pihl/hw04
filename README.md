@@ -1,68 +1,71 @@
-# BEE 4750 Homework 4
+# Homework 4: Generating Capacity Expansion
 
-Instructions: [![Web Instructions](https://img.shields.io/static/v1?label=HW4&message=HTML&color=b31b1b&labelColor=222222&style=flat)](https://viveks.me/environmental-systems-analysis/assignments/hw4/hw4/) [![PDF Instructions](https://img.shields.io/static/v1?label=HW4&message=PDF&color=b31b1b&labelColor=222222&style=flat)](https://viveks.me/environmental-systems-analysis/assignments/hw4/hw4.pdf)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This homework assignment is focused on developing a mixed-integer linear program for solid waste management and identifying changes with a carbon tax.
+This is the repository for Homework 4 for [BEE 4750](https://viveks.me/environmental-systems-analysis), taught at [Cornell University](https://cornell.edu) in Fall 2023 by [Vivek Srikrishnan](https://viveks.me).
+
+If enrolled in the class, a PDF of the completed notebook, **with all cells evaluated**, should be submitted to Gradescope *no later* than Friday, October 27, 2023, at 9:00pm. 10% will be deducted for each day that the notebook is late.
 
 ## Learning Objectives
 
-After completing Homework 4, students will be able to:
+After completing this lab, students will be able to:
 
-* formulate a mixed-integer linear programming model for solid waste management;
-* use `JuMP.jl` to solve a mixed-integer linear program;
-* compare solutions with and without different regulatory interventions.
+* formulate a linear programming model for generating capacity expansion with renewables;
+* use `JuMP.jl` to solve a linear program;
+* interpret the solution of a linear program and its shadow prices;
+* evaluate the impact of a carbon tax on capacity expansion solutions.
 
-## Other Information
-### Plotting Instructions
+## Repository Overview
 
-The [default environment](#default-environment) contains two pre-installed [backends for `Plots.jl`](https://docs.juliaplots.org/latest/backends/): `GR` and `Plotly`. `GR` is the default backend for `Plots.jl`. If you want to try out a different backend (`Plotly` will give you slightly different plots, and also includes commands for some interactivity, like zomming in) or if you're running into errors with the default `Plots` configuration, try using `Plotly` with:
+The repository consists of the following files:
 
-```julia
-plotly() # set the Plotly backend
+- `hw04.ipynb`: Jupyter Notebook for the homework assignment. Students should create code or Markdown blocks as necessary to answer questions. **This is the only file you should need to edit.**
+- `Project.toml`, `Manifest.toml`: Julia environment files. These should just work, but feel free to add other packages as needed using the `Pkg` package manager. **This is the only other file that you might end up making changes to, though you should do this using `Pkg`, not directly.**
+- `hw04.qmd`: Source file for Jupyter notebook generation. You shouldn't need to or want to touch this; everything is in the `.ipynb` file.
+- `LICENSE`: This material is licensed using the MIT license. You can ignore this for working on the problem set.
+- `README.md`: This file. You shouldn't need to touch this.
+- `.gitignore`: This tells `git` what files to ignore. You shouldn't need to touch this.
+- `.github/`: This folder contains workflow files which generate the notebook. Again, you shouldn't need to touch this.
 
-plot(...)
-```
-### Default Environment
+## Dependencies
 
-The default environment contains the following packages:
+This notebook was written using Julia 1.9.2, and depends on the following packages:
+
 - `JuMP.jl`
-- `Cbc.jl`
 - `HiGHS.jl`
-- `Plots.jl`
-- `GR.jl`
-- `Plotly.jl`
 - `DataFrames.jl`
-- `Weave.jl`
-## What To Submit
+- `Plots.jl`
+- `Measures.jl`
+- `CSV.jl`
 
-Submit a single `.pdf` file to Gradescope. Make sure to tag each problem. You should include code with your submission in code blocks as needed for your solution. Similarly, figures should be captioned appropriately.  **Make sure that your final report includes a References section!**
+## Prerequisites
 
-To generate your `.pdf` locally, you'll need to have LaTeX and Julia installed on your system. From your local HW repository directory, run the `compile_report.jl` script:
+1. [Install Julia](https://julialang.org/downloads/) before beginning this lab. This notebook was developed with version 1.9.2, but any 1.9.x should work (there could be some issues with other versions, depending on what's changed).
+2. If necessary, [install git](https://happygitwithr.com/install-git.html) and [create a GitHub account](https://github.com). 
+3. [Clone the repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). I recommend doing this in a dedicated `BEE4750/` folder, which can also house homework assignment repositories and lecture notes. You can clone directly into the `BEE4750/` folder.   For Windows (or from another graphical interface), just create a `BEE4750` folder, then a `hw` folder inside of that, then clone into that folder. Or to clone into a `BEE4750/hw` folder, from a command prompt:
+    ```bash
+    cd BEE4750/
+    mkdir hw
+    cd hw/
+    git clone https://github.com/BEE4750/hw04.git
+    ```
 
-```bash
-julia compile_report.jl solution-file-name.jmd
-```
-where `solution-file-name.jmd` is the name of your HW solution file. If you don't have LaTeX installed, and don't want to install it, you can get a sense of how your report will look by compiling it to HTML (it won't be very pretty, as there's no stylesheet, but you'll see all of the code snippets, results, and plots):
+## Opening The Notebook
 
-```bash
-julia compile_report.jl solution-file-name.jmd html
-```
-
-If you have the Julia REPL open, you can also compile your file to a `.pdf` using
-
-```julia, eval=false
-include("compile_report.jl")
-compile_report("solution-file-name.jmd")
-```
-or to HTML by adding in the optional "html" argument
-
-```julia, eval=false
-include("compile_report.jl")
-compile_report("solution-file-name.jmd", "html")
-```
-
-You can then save the HTML to a PDF using your browser of choice.
-
-## Assignment Logistics
-
-For information on accessing, writing, compiling, and submitting your report, see [the course website](https://viveks.me/environmental-systems-analysis/assignments/assignment-logistics/).
+1. To interact (view and run) the notebook, there are two options:
+  - Install an integrated development environment, or IDE (I recommend [VS Code](https://code.visualstudio.com/) with the [Julia extension](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia)). 
+  - Use the [`IJulia.jl` package](https://github.com/JuliaLang/IJulia.jl). I've included this in the project environment (discussed below), so no further steps are needed.  
+2. Opening the notebook will depend on what you decided to do in the previous step. 
+  - If you installed VS Code, you should be able to just open `hw04.ipynb` and everything should just work. 
+  - If you're using a different IDE, Google how to make sure that it is set up to run a Julia notebook.
+  - If you want to use `IJulia.jl`, open a Julia prompt. You can do this by:
+    - Using the `Julia-1.9` or equivalent graphical program, type `cd("BEE4750/hw")` or whatever path points to your lab notebook folder;
+    - Navigating to your `BEE4750/hw/hw04` folder and typing `julia` to open the prompt.Then:
+    
+      ```julia
+      import Pkg
+      Pkg.activate(".")
+      using IJulia
+      notebook()
+      ```
+      and you can navigate to and open `hw04.ipynb`.
