@@ -102,7 +102,7 @@ Finally, we load the hourly solar and wind capacity factors, which are plotted i
 ```{julia}
 #| echo: true
 #| label: fig-cf
-#| layout-ncol: 2
+#| layout-nrow: 2
 #| fig-cap: "Hourly solar and wind capacity factors."
 #| fig-subcap:
 #|   - "January"
@@ -134,7 +134,6 @@ While coal, CCGT, and CT plants can generate at their full installed capacity, g
 ## Significant Digits
 
 Use `round(x; digits=n)` to report values to the appropriate precision!
-:::
 :::
 
 ::: {.cell .markdown}
