@@ -1,5 +1,5 @@
 ---
-title: "BEE 4750 Homework 4: Generating Capacity Epxansion"
+title: "BEE 4750 Homework 4: Generating Capacity Expansion"
 format:
     html:        
         warning: true
@@ -30,7 +30,7 @@ Friday, 10/27/23, 9:00pm
 
 If you are enrolled in the course, make sure that you use the GitHub Classroom link provided in Ed Discussion, or you may not be able to get help if you run into problems.
 
-Otherwise, you can [find the Github repository here]({{< var github_org.repo >}}/hw03).
+Otherwise, you can [find the Github repository here]({{< var github_org.repo >}}/hw04).
 
 :::
 
@@ -91,10 +91,8 @@ Next, we load the generator data. This data includes fixed costs (\$/MW installe
 #| echo: true
 #| label: tbl-generators
 #| tbl-cap: Generator type data, including fixed costs ($/MW installed), variable costs ($/MWh generated), and CO~2~ emissions intensity (tCO~2~/MWh generated).
-#| output: asis
 
 gens = DataFrame(CSV.File("data/generators.csv"))
-markdown_table(gens)
 ```
 
 Finally, we load the hourly solar and wind capacity factors, which are plotted in @fig-cf. These tell us the fraction of installed capacity which is expected to be available in a given hour for generation (typically based on the average meteorology).
@@ -136,34 +134,46 @@ While coal, CCGT, and CT plants can generate at their full installed capacity, g
 Use `round(x; digits=n)` to report values to the appropriate precision!
 :::
 
+::: {.callout-tip}
+## Getting Variable Output Values
+
+`value.(x)` will report the values of a `JuMP` variable `x`, but it will return a special container which holds other information about `x` that is useful for `JuMP`. This means that you can't use this output directly for further calculations. To just extract the values, use `value.(x).data`.
+:::
+
+::: {.callout-tip}
+## Suppressing Model Command Output
+
+The output of specifying model components (variable or constraints) can be quite large for this problem because of the number of time periods. If you end a cell with an `@variable` or `@constraint` command, I *highly* recommend suppressing output by adding a semi-colon after the last command, or you might find that your notebook crashes.
+:::
+
 ::: {.cell .markdown}
-### Problem 1 (55 points)
+### Problem 1 (22 points)
 
 Your first task is to find a capacity expansion plan which minimizes total costs of investment and operation.
 :::
 
 ::: {.cell .markdown}
-#### Problem 1.1 (5 points)
+#### Problem 1.1 (2 points)
 
 Identify and define the decision variables for the problem. Make sure to include units.
 
 :::
 
 ::: {.cell .markdown}
-#### Problem 1.2 (10 points)
+#### Problem 1.2 (3 points)
 
-Formulate the objective function. Make sure to include any needed derivations or justifications for your equation(s).
+Formulate the objective function. Make sure to include any needed derivations or justifications for your equation(s) and define any additional required notation beyond that introduced in Problem 1.1.
 
 :::
 
 ::: {.cell .markdown}
-#### Problem 1.3 (10 points)
+#### Problem 1.3 (4 points)
 
-Derive all relevant constraints. Make sure to include any needed justifications or derivations. Why is your set of constraints complete?
+Derive all relevant constraints. Make sure to include any needed justifications or derivations.
 :::
 
 ::: {.cell .markdown}
-#### Problem 1.4 (10 points)
+#### Problem 1.4 (3 points)
 
 Implement your optimization problem in `JuMP`.
 
@@ -171,7 +181,7 @@ Implement your optimization problem in `JuMP`.
 
 ::: {.cell .markdown}
 
-#### Problem 1.5 (10 points)
+#### Problem 1.5 (5 points)
 
 Find the optimal solution. How much should the utility build of each type of generating plant? What will the total cost be? How much energy will be non-served?
 
@@ -179,28 +189,28 @@ Find the optimal solution. How much should the utility build of each type of gen
 
 ::: {.cell .markdown}
 
-#### Problem 1.6 (10 points)
+#### Problem 1.6 (5 points)
 
-Plot how much electricity will be generated under this plan each hour by each type of plant. Make both a line plot for the raw amounts (using `plot`) and a stacked area plot to show relative contributions to the total demand (using `areaplot`). What are your take-aways? Do your results make sense?
+What fraction of annual generation does each plant type produce? How does this compare to the breakdown of built capacity that you found in Problem 1.5? Do these results make sense given the generator data?
 
 :::
 
 ::: {.cell .markdown}
-### Problem 2 (45 points)
+### Problem 2 (18 points)
 
 The NY state legislature is considering enacting an annual CO~2~ limit, which for the utility would limit the emissions in its footprint to 1.5 MtCO~2~/yr.
 
 :::
 
 ::: {.cell .markdown}
-#### Problem 2.1 (10 points)
+#### Problem 2.1 (3 points)
 
 What changes are needed to your linear program from Problem 1? Re-formulate the problem and report it in standard form.
 
 :::
 
 ::: {.cell .markdown}
-#### Problem 2.2 (10 points)
+#### Problem 2.2 (3 points)
 
 Implement the new optimization problem in `JuMP`. 
 
@@ -209,20 +219,20 @@ Implement the new optimization problem in `JuMP`.
 
 
 ::: {.cell .markdown}
-#### Problem 2.3 (10 points)
+#### Problem 2.3 (5 points)
 
-Find the optimal solution. How much should the utility build of each type of generating plant? What is different from your plan from Problem 1?
+Find the optimal solution. How much should the utility build of each type of generating plant? What is different from your plan from Problem 1? Do these changes make sense?
 
 :::
 
 ::: {.cell .markdown}
-#### Problem 2.4 (10 points)
+#### Problem 2.4 (5 points)
 
-Plot how much electricity will be generated under this plan each hour by each type of plant. Make both a line plot for the raw amounts (using `plot`) and a stacked area plot to show relative contributions to the total demand (using `areaplot`).  What is different from your plan in Problem 1? Do these results make sense?
+What fraction of annual generation does each plant type produce? How does this compare to the breakdown of built capacity that you found in Problem 2.3? What are the differences between these results and your plan from Problem 1?
 :::
 
 ::: {.cell .markdown}
-#### Problem 2.5 (5 points)
+#### Problem 2.5 (2 points)
 
 What would the value to the utility be of allowing it to emit an additional 1000 tCO~2~/yr? An additional 5000?
 
