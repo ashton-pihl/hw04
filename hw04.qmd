@@ -85,7 +85,7 @@ A farmer has access to a pesticide which can be used on corn, soybeans, and whea
 | 2 | 4400 | 4200 | 7900 |
 : Crop yields from applying varying pesticide rates for Problem 1. {#tbl-yields}
 
-The costs of production , *excluding pesticide*, for each crop, and selling prices, are shown in @tbl-costs.
+The costs of production, *excluding pesticides*, for each crop, and selling prices, are shown in @tbl-costs.
 
 | Crop | Production Cost (\$/ha-yr) | Selling Price (\$/kg) |
 |:----:|:--------------------------------:|:--------------------:|
@@ -123,12 +123,12 @@ demand[:, :Hour] = 1:nrow(demand)
 plot(demand.Hour, demand.Demand, xlabel="Hour of Year", ylabel="Demand (MWh)", label=:false)
 ```
 
-Next, we load the generator data. This data includes fixed costs (\$/MW installed), variable costs (\$/MWh generated), and CO~2~ emissions intensity (tCO~2~/MWh generated).
+Next, we load the generator data, shown in @tbl-generators. This data includes fixed costs (\$/MW installed), variable costs (\$/MWh generated), and CO~2~ emissions intensity (tCO~2~/MWh generated).
 
 ```{julia}
 #| echo: true
 #| label: tbl-generators
-#| tbl-cap: Generator type data, including fixed costs ($/MW installed), variable costs ($/MWh generated), and CO~2~ emissions intensity (tCO~2~/MWh generated).
+#| tbl-cap: Generator type data, including fixed costs (\$/MW installed), variable costs (\$/MWh generated), and CO~2~ emissions intensity (tCO~2~/MWh generated).
 
 gens = DataFrame(CSV.File("data/generators.csv"))
 ```
@@ -194,6 +194,8 @@ The output of specifying model components (variable or constraints) can be quite
 
 
 ### Problem 3 (10 points)
+
+**This problem is only required for students in BEE 5750**.
 
 The NY state legislature is considering enacting an annual CO~2~ limit, which for the utility would limit the emissions in its footprint to 1.5 MtCO~2~/yr.
 
