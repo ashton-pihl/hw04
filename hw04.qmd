@@ -177,7 +177,7 @@ While coal, CCGT, and CT plants can generate at their full installed capacity, g
 ::: {.callout-tip}
 ## Significant Digits
 
-Use `round(x; digits=n)` to report values to the appropriate precision!
+Use `round(x; digits=n)` to report values to the appropriate precision! If your number is on a different order of magnitude and you want to round to a certain number of significant digits, you can use `round(x; sigdigits=n)`.
 :::
 
 ::: {.callout-tip}
