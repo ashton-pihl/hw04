@@ -76,7 +76,7 @@ using MarkdownTables
 
 ### Problem 1 (20 points)
 
-A farmer has access to a pesticide which can be used on corn, soybeans, and wheat fields, and costs $70/kg-ha-yr to apply. The crop yields the farmer can obtain following crop yields by applying varying rates of pesticides to the field are shown in @tbl-yields.
+A farmer has access to a pesticide which can be used on corn, soybeans, and wheat fields, and costs $70/kg-yr to apply. The crop yields the farmer can obtain following crop yields by applying varying rates of pesticides to the field are shown in @tbl-yields.
 
 | Application Rate (kg/ha) | Soybean (kg/ha) | Wheat (kg/ha) | Corn (kg/ha) |
 |:----------------------------------:|:---------------:|:-------------:|:------------:|
